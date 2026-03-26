@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { LayoutGrid, MessageSquare, FileText, BarChart3, Database, ChevronRight, CornerDownLeft, UploadCloud, File, X, ChevronLeft } from 'lucide-react'
+import { LayoutGrid, MessageSquare, FileText, BarChart3, Database, ChevronRight, CornerDownLeft, UploadCloud, File, X, ChevronLeft, Sparkles } from 'lucide-react'
 
 export default function Page() {
   const [messages, setMessages] = useState<{id: string, role: string, content: string}[]>([])
@@ -107,10 +107,10 @@ export default function Page() {
 
   // --- FABRICATED INTERNAL PRODUCT DATA ---
   const stats = [
-    { label: 'Total Qualitative Inputs', value: '18,492' },
-    { label: 'Critical UX Blockers', value: '47' },
-    { label: 'Avg Usability (SUS)', value: '68 / 100' },
-    { label: 'Index Freshness', value: 'Live' },
+    { label: 'Total Qualitative Inputs', value: '18,492', context: 'App store, Play store & internal feedback logs.' },
+    { label: 'Critical UX Blockers', value: '47', context: 'High-severity issues blocking primary user journeys.' },
+    { label: 'Avg Usability (SUS)', value: '68 / 100', context: 'Blended average across 5 core digital products.' },
+    { label: 'Index Freshness', value: 'Live', context: 'Data models updated dynamically.' },
   ]
 
   const frictionData = [
@@ -122,11 +122,11 @@ export default function Page() {
   ]
 
   const productUsability = [
-    { label: 'Leap (Savings)', score: 85 },
-    { label: 'PFM (Budget Tracker)', score: 72 },
-    { label: 'Quick Overdraft (QOD)', score: 64 },
-    { label: 'Olive (Credit Card)', score: 48 },
-    { label: 'Vision (KYC Platform)', score: 32 },
+    { label: 'Leap Savings', score: 85 },
+    { label: 'PFM Budget', score: 72 },
+    { label: 'Quick OD', score: 64 },
+    { label: 'Olive CC', score: 48 },
+    { label: 'Vision KYC', score: 32 },
   ]
 
   if (isBooting) {
@@ -219,9 +219,12 @@ export default function Page() {
               
               <div className="grid grid-cols-4 gap-5">
                 {stats.map((stat, i) => (
-                  <div key={i} className="group bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600">
-                    <p className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-semibold mb-3">{stat.label}</p>
-                    <p className="text-3xl font-light text-zinc-100 tracking-tight">{stat.value}</p>
+                  <div key={i} className="group flex flex-col justify-between bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600">
+                    <div>
+                      <p className="text-[10px] text-zinc-400 uppercase tracking-[0.2em] font-semibold mb-3">{stat.label}</p>
+                      <p className="text-3xl font-light text-zinc-100 tracking-tight mb-4">{stat.value}</p>
+                    </div>
+                    <p className="text-[10px] text-zinc-600 leading-relaxed border-t border-zinc-800/50 pt-3 group-hover:text-zinc-500 transition-colors">{stat.context}</p>
                   </div>
                 ))}
               </div>
@@ -229,13 +232,21 @@ export default function Page() {
               {/* TWO COLUMN GRAPH LAYOUT */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
                 
-                {/* Graph 1: Top Friction Points */}
-                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-lg font-medium text-zinc-200">Critical Journey Drop-offs</h3>
-                    <button onClick={() => setActiveTab('assistant')} className="text-xs text-amber-500 hover:text-amber-400 font-medium tracking-wide flex items-center gap-1">Ask AI to analyze <ChevronRight className="w-3 h-3" /></button>
+                {/* Graph 1: Top Friction Points (Horizontal) */}
+                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full relative">
+                  <div className="flex items-start justify-between mb-8">
+                    <div>
+                      <h3 className="text-lg font-medium text-zinc-200 mb-1">Critical Journey Drop-offs</h3>
+                      <p className="text-xs text-zinc-500">Most frequent user complaints by percentage.</p>
+                    </div>
+                    <button 
+                      onClick={() => setActiveTab('assistant')} 
+                      className="px-4 py-2 bg-zinc-800 hover:bg-amber-500 text-zinc-300 hover:text-zinc-950 text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 border border-zinc-700 hover:border-amber-500 shadow-sm group"
+                    >
+                      <Sparkles className="w-3 h-3 text-amber-500 group-hover:text-zinc-950 transition-colors" /> Ask AI to Analyze
+                    </button>
                   </div>
-                  <div className="space-y-6 flex-1">
+                  <div className="space-y-6 flex-1 mt-4">
                     {frictionData.map((item, i) => (
                       <div key={i} className="flex flex-col gap-2">
                         <div className="flex justify-between text-sm"><span className="text-zinc-300">{item.label}</span><span className="text-zinc-500 font-mono">{item.value}%</span></div>
@@ -245,27 +256,36 @@ export default function Page() {
                   </div>
                 </div>
 
-                {/* Graph 2: Product Usability Scores */}
+                {/* Graph 2: Product Usability Scores (Vertical Bars) */}
                 <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-lg font-medium text-zinc-200">System Usability Scale (SUS)</h3>
-                    <span className="text-xs text-zinc-500 uppercase tracking-widest font-medium">By Product Line</span>
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-medium text-zinc-200 mb-1">System Usability Scale (SUS)</h3>
+                      <p className="text-xs text-zinc-500">Industry standard UX metric out of 100.</p>
+                    </div>
                   </div>
-                  <div className="space-y-6 flex-1">
+                  
+                  {/* Vertical Bar Chart Container */}
+                  <div className="flex items-end justify-between flex-1 mt-8 gap-4 h-48 border-b border-zinc-800 pb-2">
                     {productUsability.map((item, i) => (
-                      <div key={i} className="flex items-center gap-4">
-                        <span className="w-40 text-sm text-zinc-300 truncate">{item.label}</span>
-                        <div className="flex-1 h-2 bg-zinc-900 rounded-full overflow-hidden">
+                      <div key={i} className="flex flex-col items-center gap-3 w-1/5 group h-full justify-end relative">
+                        {/* Score Tooltip/Label */}
+                        <div className="text-zinc-400 font-mono text-xs group-hover:text-zinc-100 transition-colors">{item.score}</div>
+                        
+                        {/* The Vertical Bar */}
+                        <div className="w-full bg-zinc-900 rounded-t-lg overflow-hidden flex items-end relative h-32 group-hover:bg-zinc-800 transition-colors">
                           <div 
-                            className={`h-full rounded-full transition-all duration-1000 ease-out ${item.score > 70 ? 'bg-emerald-500' : item.score > 40 ? 'bg-amber-500' : 'bg-red-500'}`} 
-                            style={{ width: `${item.score}%` }}
+                            className={`w-full rounded-t-lg transition-all duration-1000 ease-out ${item.score > 70 ? 'bg-emerald-500/80' : item.score > 40 ? 'bg-amber-500/80' : 'bg-red-500/80'} group-hover:brightness-125`} 
+                            style={{ height: `${item.score}%` }}
                           ></div>
                         </div>
-                        <span className="w-8 text-right text-zinc-500 font-mono text-sm">{item.score}</span>
+                        
+                        {/* Product Label */}
+                        <span className="text-[10px] text-zinc-500 text-center leading-tight mt-2 font-medium">{item.label}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-6 pt-6 border-t border-zinc-800/50">SUS Scores below 68 indicate marginal to poor usability.</p>
+                  <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-6">Note: Scores below 68 indicate marginal to poor usability requiring intervention.</p>
                 </div>
 
               </div>
