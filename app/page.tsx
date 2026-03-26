@@ -7,7 +7,7 @@ export default function Page() {
   const [messages, setMessages] = useState<{id: string, role: string, content: string}[]>([])
   const [localInput, setLocalInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [activeTab, setActiveTab] = useState('assistant')
+  const [activeTab, setActiveTab] = useState('dashboard')
   const [isBooting, setIsBooting] = useState(true)
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -24,7 +24,6 @@ export default function Page() {
 
   const readUploadedFiles = async (): Promise<string> => {
     if (uploadedFiles.length === 0) return "";
-    
     const readPromises = uploadedFiles.map(file => {
       return new Promise<string>((resolve) => {
         const reader = new FileReader();
@@ -32,7 +31,6 @@ export default function Page() {
         reader.readAsText(file); 
       });
     });
-
     const fileContentsArray = await Promise.all(readPromises);
     return fileContentsArray.join("");
   }
@@ -107,20 +105,28 @@ export default function Page() {
     { id: 'data', icon: Database, label: 'Data Sources' },
   ]
 
-  // --- FINTECH DATA INJECTED HERE ---
+  // --- FABRICATED INTERNAL PRODUCT DATA ---
   const stats = [
-    { label: 'Analyzed App Reviews', value: '6,247' },
-    { label: 'Critical UX Blockers', value: '24' },
-    { label: 'Avg Sentiment Score', value: '2.8 / 5' },
-    { label: 'Index Freshness', value: '15 mins ago' },
+    { label: 'Total Qualitative Inputs', value: '18,492' },
+    { label: 'Critical UX Blockers', value: '47' },
+    { label: 'Avg Usability (SUS)', value: '68 / 100' },
+    { label: 'Index Freshness', value: 'Live' },
   ]
 
   const frictionData = [
-    { label: 'FaceID / Biometric Login Failure', value: 78 },
-    { label: 'UPI Payment Timeout Error', value: 64 },
-    { label: 'Session Expired Too Quickly', value: 45 },
-    { label: 'Statement PDF Download Crash', value: 32 },
-    { label: 'OTP Auto-read Not Triggering', value: 18 },
+    { label: 'Vision KYC: Video API timeout on 4G', value: 82 },
+    { label: 'Olive CC: Pre-fill failure for ETB address', value: 65 },
+    { label: 'Leap Savings: DigiLocker redirection crash', value: 58 },
+    { label: 'Midas Fresh: Valuation screen confusion', value: 41 },
+    { label: 'Grabdeals: SubZero migration broken links', value: 27 },
+  ]
+
+  const productUsability = [
+    { label: 'Leap (Savings)', score: 85 },
+    { label: 'PFM (Budget Tracker)', score: 72 },
+    { label: 'Quick Overdraft (QOD)', score: 64 },
+    { label: 'Olive (Credit Card)', score: 48 },
+    { label: 'Vision (KYC Platform)', score: 32 },
   ]
 
   if (isBooting) {
@@ -203,12 +209,14 @@ export default function Page() {
 
         <main className="flex-1 overflow-y-auto scroll-smooth relative flex flex-col pb-12 transition-all duration-300">
           
+          {/* VIEW: DASHBOARD */}
           {activeTab === 'dashboard' && (
-            <div className="max-w-6xl mx-auto w-full p-10 flex flex-col gap-8 animate-in fade-in duration-300">
+            <div className="max-w-7xl mx-auto w-full p-10 flex flex-col gap-8 animate-in fade-in duration-300">
               <div>
                 <h1 className="text-4xl font-semibold text-zinc-100 tracking-tight mb-2">Research Overview</h1>
-                <p className="text-zinc-500 text-sm">Indexed from 6,000+ Appbot qualitative reviews.</p>
+                <p className="text-zinc-500 text-sm">Indexed from internal logs, app reviews, and user research data.</p>
               </div>
+              
               <div className="grid grid-cols-4 gap-5">
                 {stats.map((stat, i) => (
                   <div key={i} className="group bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600">
@@ -217,19 +225,49 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-              <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 mt-4 hover:border-zinc-700 transition-colors">
-                <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-lg font-medium text-zinc-200">Top Frequency Friction Points</h3>
-                  <button onClick={() => setActiveTab('assistant')} className="text-xs text-amber-500 hover:text-amber-400 font-medium tracking-wide flex items-center gap-1">Ask AI to analyze <ChevronRight className="w-3 h-3" /></button>
+
+              {/* TWO COLUMN GRAPH LAYOUT */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
+                
+                {/* Graph 1: Top Friction Points */}
+                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-8">
+                    <h3 className="text-lg font-medium text-zinc-200">Critical Journey Drop-offs</h3>
+                    <button onClick={() => setActiveTab('assistant')} className="text-xs text-amber-500 hover:text-amber-400 font-medium tracking-wide flex items-center gap-1">Ask AI to analyze <ChevronRight className="w-3 h-3" /></button>
+                  </div>
+                  <div className="space-y-6 flex-1">
+                    {frictionData.map((item, i) => (
+                      <div key={i} className="flex flex-col gap-2">
+                        <div className="flex justify-between text-sm"><span className="text-zinc-300">{item.label}</span><span className="text-zinc-500 font-mono">{item.value}%</span></div>
+                        <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden"><div className="h-full bg-amber-500 rounded-full transition-all duration-1000 ease-out" style={{ width: `${item.value}%` }}></div></div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-6">
-                  {frictionData.map((item, i) => (
-                    <div key={i} className="flex flex-col gap-2">
-                      <div className="flex justify-between text-sm"><span className="text-zinc-400">{item.label}</span><span className="text-zinc-500 font-mono">{item.value}%</span></div>
-                      <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden"><div className="h-full bg-amber-500 rounded-full transition-all duration-1000 ease-out" style={{ width: `${item.value}%` }}></div></div>
-                    </div>
-                  ))}
+
+                {/* Graph 2: Product Usability Scores */}
+                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-8">
+                    <h3 className="text-lg font-medium text-zinc-200">System Usability Scale (SUS)</h3>
+                    <span className="text-xs text-zinc-500 uppercase tracking-widest font-medium">By Product Line</span>
+                  </div>
+                  <div className="space-y-6 flex-1">
+                    {productUsability.map((item, i) => (
+                      <div key={i} className="flex items-center gap-4">
+                        <span className="w-40 text-sm text-zinc-300 truncate">{item.label}</span>
+                        <div className="flex-1 h-2 bg-zinc-900 rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full transition-all duration-1000 ease-out ${item.score > 70 ? 'bg-emerald-500' : item.score > 40 ? 'bg-amber-500' : 'bg-red-500'}`} 
+                            style={{ width: `${item.score}%` }}
+                          ></div>
+                        </div>
+                        <span className="w-8 text-right text-zinc-500 font-mono text-sm">{item.score}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-6 pt-6 border-t border-zinc-800/50">SUS Scores below 68 indicate marginal to poor usability.</p>
                 </div>
+
               </div>
             </div>
           )}
@@ -271,7 +309,7 @@ export default function Page() {
                   <div className="h-full flex flex-col items-center justify-center text-center opacity-50 select-none">
                     <MessageSquare className="w-12 h-12 text-zinc-700 mb-4" />
                     <h2 className="text-xl font-medium text-zinc-400 mb-2">How can I help with your research?</h2>
-                    <p className="text-sm text-zinc-600 max-w-md">I have analyzed the Appbot data. Ask me about sentiment trends, specific friction points, or feature requests.</p>
+                    <p className="text-sm text-zinc-600 max-w-md">I have analyzed the indexed data. Ask me about sentiment trends, specific friction points, or feature requests.</p>
                   </div>
                 ) : (
                   messages.map(m => (
