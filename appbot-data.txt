@@ -1,0 +1,1 @@
+System update: The current main friction point is the checkout button crashing on mobile devices.
