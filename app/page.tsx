@@ -12,7 +12,6 @@ export default function Page() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Drag & Drop State
   const [isDragging, setIsDragging] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
 
@@ -23,7 +22,6 @@ export default function Page() {
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }) }, [messages])
 
-  // --- NEW: Read File Contents before submitting ---
   const readUploadedFiles = async (): Promise<string> => {
     if (uploadedFiles.length === 0) return "";
     
@@ -31,7 +29,7 @@ export default function Page() {
       return new Promise<string>((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(`--- DATA FROM ${file.name} ---\n${e.target?.result}\n\n`);
-        reader.readAsText(file); // Only reads raw text/CSV
+        reader.readAsText(file); 
       });
     });
 
@@ -52,16 +50,14 @@ export default function Page() {
     setIsLoading(true);
 
     try {
-      // 1. Grab any text from files dropped in the UI
       const extractedFileContext = await readUploadedFiles();
 
-      // 2. Send the chat history AND the file data to the backend
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           messages: newMessages,
-          fileContext: extractedFileContext // The dynamic data payload
+          fileContext: extractedFileContext 
         }),
       });
 
@@ -111,11 +107,20 @@ export default function Page() {
     { id: 'data', icon: Database, label: 'Data Sources' },
   ]
 
+  // --- FINTECH DATA INJECTED HERE ---
+  const stats = [
+    { label: 'Analyzed App Reviews', value: '6,247' },
+    { label: 'Critical UX Blockers', value: '24' },
+    { label: 'Avg Sentiment Score', value: '2.8 / 5' },
+    { label: 'Index Freshness', value: '15 mins ago' },
+  ]
+
   const frictionData = [
-    { label: 'Checkout Crash (Mobile)', value: 85 },
-    { label: 'Password Reset Loop', value: 42 },
-    { label: 'Cart Empty Error', value: 28 },
-    { label: 'Slow Image Loading', value: 15 },
+    { label: 'FaceID / Biometric Login Failure', value: 78 },
+    { label: 'UPI Payment Timeout Error', value: 64 },
+    { label: 'Session Expired Too Quickly', value: 45 },
+    { label: 'Statement PDF Download Crash', value: 32 },
+    { label: 'OTP Auto-read Not Triggering', value: 18 },
   ]
 
   if (isBooting) {
@@ -205,7 +210,7 @@ export default function Page() {
                 <p className="text-zinc-500 text-sm">Indexed from 6,000+ Appbot qualitative reviews.</p>
               </div>
               <div className="grid grid-cols-4 gap-5">
-                {[{ label: 'Total App Reviews', value: '6,247' }, { label: 'Identified Friction Points', value: '142' }, { label: 'Avg Sentiment Score', value: '3.2 / 5' }, { label: 'Data Freshness', value: '2 hrs ago' }].map((stat, i) => (
+                {stats.map((stat, i) => (
                   <div key={i} className="group bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600">
                     <p className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-semibold mb-3">{stat.label}</p>
                     <p className="text-3xl font-light text-zinc-100 tracking-tight">{stat.value}</p>
