@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     // BUGFIX 1: Reverting back to Haiku 
     const result = await streamText({
-      model: anthropic('claude-3-haiku-20240307'),
+      model: anthropic('claude-3-5-haiku-latest'),
       system: systemPrompt,
       messages: safeMessages, // Use the sanitized history
     });
