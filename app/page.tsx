@@ -96,10 +96,13 @@ export default function Page() {
   }
   
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setUploadedFiles(prev => [...prev, ...Array.from(e.target.files as FileList)]);
+    const selectedFiles = e.target.files;
+    if (selectedFiles && selectedFiles.length > 0) {
+      const filesArray = Array.from(selectedFiles);
+      setUploadedFiles(prev => [...prev, ...filesArray]);
     }
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    // Safely reset the input so you can re-upload the same file if needed
+    e.target.value = '';
   }
 
   const removeFile = (idxToRemove: number) => {
