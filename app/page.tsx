@@ -11,6 +11,7 @@ export default function Page() {
   const [isBooting, setIsBooting] = useState(true)
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [isDragging, setIsDragging] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
@@ -93,6 +94,14 @@ export default function Page() {
       setUploadedFiles(prev => [...prev, ...Array.from(e.dataTransfer.files)]);
     }
   }
+  
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setUploadedFiles(prev => [...prev, ...Array.from(e.target.files as FileList)]);
+    }
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }
+
   const removeFile = (idxToRemove: number) => {
     setUploadedFiles(prev => prev.filter((_, idx) => idx !== idxToRemove));
   }
@@ -293,6 +302,11 @@ export default function Page() {
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors duration-300 ${isDragging ? 'bg-[#7A1A3E]/20 text-[#7A1A3E]' : 'bg-[#27272A] text-zinc-400'}`}><UploadCloud className="w-8 h-8" /></div>
                 <h3 className="text-xl font-medium text-zinc-200 mb-2">{isDragging ? 'Drop files here' : 'Drag & drop files'}</h3>
                 <p className="text-zinc-500 text-sm mb-6 text-center max-w-sm">Support for CSV, TXT, and raw data exports. Files are processed securely in your local environment.</p>
+                
+                <input type="file" multiple className="hidden" ref={fileInputRef} onChange={handleFileSelect} />
+                <button onClick={() => fileInputRef.current?.click()} className="px-6 py-2.5 bg-[#27272A] hover:bg-[#7A1A3E] text-zinc-300 hover:text-white rounded-lg text-sm font-semibold tracking-wide transition-colors border border-[#27272A] hover:border-[#7A1A3E] shadow-sm">
+                  Browse Files
+                </button>
               </div>
               {uploadedFiles.length > 0 && (
                 <div className="bg-[#1C1C1F] border border-[#27272A] rounded-2xl p-6 mt-2 animate-in slide-in-from-bottom-4 duration-300">
