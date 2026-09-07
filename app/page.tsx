@@ -105,7 +105,6 @@ export default function Page() {
     { id: 'data', icon: Database, label: 'Data Sources' },
   ]
 
-  // --- FABRICATED INTERNAL PRODUCT DATA ---
   const stats = [
     { label: 'Total Qualitative Inputs', value: '18,492', context: 'App store, Play store & internal feedback logs.' },
     { label: 'Critical UX Blockers', value: '47', context: 'High-severity issues blocking primary user journeys.' },
@@ -131,14 +130,14 @@ export default function Page() {
 
   if (isBooting) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-[#0a0a0a] text-zinc-100 antialiased" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      <div className="flex flex-col items-center justify-center h-screen bg-[#0F0F11] text-zinc-100 antialiased" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
         <div className="flex flex-col items-center gap-6 animate-pulse">
           <div className="w-16 h-16 bg-zinc-100 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-            <span className="text-2xl font-black text-zinc-900 tracking-tighter">C360</span>
+            <span className="text-2xl font-black text-[#0F0F11] tracking-tighter">C360</span>
           </div>
           <div className="flex flex-col items-center gap-2">
             <h1 className="text-sm tracking-[0.4em] text-zinc-400 uppercase font-medium">Cust 360</h1>
-            <p className="text-[10px] text-amber-500 tracking-widest uppercase">System Initialization...</p>
+            <p className="text-[10px] text-[#7A1A3E] tracking-widest uppercase">System Initialization...</p>
           </div>
         </div>
       </div>
@@ -146,14 +145,14 @@ export default function Page() {
   }
 
   return (
-    <div className="flex h-screen bg-[#0a0a0a] text-zinc-100 antialiased selection:bg-amber-500/30 animate-in fade-in duration-700 relative" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    <div className="flex h-screen bg-[#0F0F11] text-zinc-100 antialiased selection:bg-[#7A1A3E]/30 animate-in fade-in duration-700 relative" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       
-      <aside className={`${isSidebarExpanded ? 'w-64' : 'w-20'} bg-[#111111] flex flex-col py-6 gap-8 border-r border-zinc-800/60 z-20 transition-all duration-300 ease-in-out relative`}>
+      <aside className={`${isSidebarExpanded ? 'w-64' : 'w-20'} bg-[#1C1C1F] flex flex-col py-6 gap-8 border-r border-[#27272A] z-20 transition-all duration-300 ease-in-out relative`}>
         <div className={`flex items-center px-5 ${isSidebarExpanded ? 'justify-start' : 'justify-center'} h-10`}>
           <div className="w-10 h-10 bg-zinc-100 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm relative group cursor-default">
-            <span className="text-sm font-black text-zinc-900 tracking-tighter">C360</span>
+            <span className="text-sm font-black text-[#0F0F11] tracking-tighter">C360</span>
             {!isSidebarExpanded && (
-              <div className="absolute left-14 bg-zinc-800 text-zinc-100 text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Cust 360</div>
+              <div className="absolute left-14 bg-[#27272A] text-zinc-100 text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Cust 360</div>
             )}
           </div>
           {isSidebarExpanded && (
@@ -169,8 +168,8 @@ export default function Page() {
             const IconComponent = item.icon;
             const isActive = activeTab === item.id;
             return (
-              <button key={item.id} onClick={() => setActiveTab(item.id)} className={`w-full h-12 rounded-xl flex items-center ${isSidebarExpanded ? 'justify-start px-4' : 'justify-center'} transition-all duration-200 group relative ${isActive ? 'bg-zinc-800/80 text-amber-500 shadow-inner' : 'text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300'}`} title={!isSidebarExpanded ? item.label : undefined}>
-                {isActive && <div className="absolute left-0 w-1 h-6 bg-amber-500 rounded-r-full transition-all duration-300"></div>}
+              <button key={item.id} onClick={() => setActiveTab(item.id)} className={`w-full h-12 rounded-xl flex items-center ${isSidebarExpanded ? 'justify-start px-4' : 'justify-center'} transition-all duration-200 group relative ${isActive ? 'bg-[#27272A] text-[#7A1A3E] shadow-inner' : 'text-zinc-500 hover:bg-[#27272A]/50 hover:text-zinc-300'}`} title={!isSidebarExpanded ? item.label : undefined}>
+                {isActive && <div className="absolute left-0 w-1 h-6 bg-[#7A1A3E] rounded-r-full transition-all duration-300"></div>}
                 <div className="flex items-center gap-4">
                   <IconComponent className="w-5 h-5 flex-shrink-0" strokeWidth={isActive ? 2.5 : 2} />
                   {isSidebarExpanded && <span className="text-sm font-medium whitespace-nowrap overflow-hidden transition-opacity">{item.label}</span>}
@@ -181,17 +180,17 @@ export default function Page() {
         </nav>
 
         <div className={`mt-auto flex ${isSidebarExpanded ? 'flex-row px-5 justify-between' : 'flex-col items-center gap-4'} w-full pb-2`}>
-          <div className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:border-zinc-400 transition-colors">
-            <span className="text-xs font-semibold text-zinc-300">UX</span>
+          <div className="w-10 h-10 bg-[#27272A] border border-[#27272A] rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:border-[#A1A1AA] transition-colors">
+            <span className="text-xs font-semibold text-[#A1A1AA]">UX</span>
           </div>
-          <button onClick={() => setIsSidebarExpanded(!isSidebarExpanded)} className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-colors">
+          <button onClick={() => setIsSidebarExpanded(!isSidebarExpanded)} className="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-500 hover:text-zinc-300 hover:bg-[#27272A]/50 transition-colors">
             <ChevronLeft className={`w-5 h-5 transition-transform duration-300 ${!isSidebarExpanded ? 'rotate-180' : ''}`} />
           </button>
         </div>
       </aside>
 
-      <div className="flex flex-col flex-1 overflow-hidden relative bg-[#0a0a0a]">
-        <header className="px-10 py-5 z-10 border-b border-zinc-800/60 bg-[#0a0a0a]/80 backdrop-blur-md flex-shrink-0 transition-all duration-300">
+      <div className="flex flex-col flex-1 overflow-hidden relative bg-[#0F0F11]">
+        <header className="px-10 py-5 z-10 border-b border-[#27272A] bg-[#0F0F11]/80 backdrop-blur-md flex-shrink-0 transition-all duration-300">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 text-xs tracking-wider">
               <span className="text-zinc-500 font-medium uppercase tracking-widest hidden sm:inline-block">Cust 360</span>
@@ -200,16 +199,15 @@ export default function Page() {
               <ChevronRight className="w-3 h-3 text-zinc-700 hidden sm:inline-block" />
               <span className="text-zinc-100 font-bold uppercase tracking-widest">{navItems.find(i => i.id === activeTab)?.label}</span>
             </div>
-            <div className="flex items-center gap-3 text-[11px] font-semibold bg-zinc-900 px-4 py-2 rounded-full border border-zinc-800 shadow-sm">
-              <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`}></div>
-              <span className={isLoading ? 'text-amber-500 uppercase tracking-widest' : 'text-zinc-400 uppercase tracking-widest'}>{isLoading ? 'Processing...' : 'System Active'}</span>
+            <div className="flex items-center gap-3 text-[11px] font-semibold bg-[#1C1C1F] px-4 py-2 rounded-full border border-[#27272A] shadow-sm">
+              <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-[#7A1A3E] animate-pulse' : 'bg-emerald-500'}`}></div>
+              <span className={isLoading ? 'text-[#7A1A3E] uppercase tracking-widest' : 'text-zinc-400 uppercase tracking-widest'}>{isLoading ? 'Processing...' : 'System Active'}</span>
             </div>
           </div>
         </header>
 
         <main className="flex-1 overflow-y-auto scroll-smooth relative flex flex-col pb-12 transition-all duration-300">
           
-          {/* VIEW: DASHBOARD */}
           {activeTab === 'dashboard' && (
             <div className="max-w-7xl mx-auto w-full p-10 flex flex-col gap-8 animate-in fade-in duration-300">
               <div>
@@ -219,21 +217,19 @@ export default function Page() {
               
               <div className="grid grid-cols-4 gap-5">
                 {stats.map((stat, i) => (
-                  <div key={i} className="group flex flex-col justify-between bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600">
+                  <div key={i} className="group flex flex-col justify-between bg-[#1C1C1F] border border-[#27272A] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#A1A1AA]">
                     <div>
-                      <p className="text-[10px] text-zinc-400 uppercase tracking-[0.2em] font-semibold mb-3">{stat.label}</p>
+                      <p className="text-[10px] text-[#A1A1AA] uppercase tracking-[0.2em] font-semibold mb-3">{stat.label}</p>
                       <p className="text-3xl font-light text-zinc-100 tracking-tight mb-4">{stat.value}</p>
                     </div>
-                    <p className="text-[10px] text-zinc-600 leading-relaxed border-t border-zinc-800/50 pt-3 group-hover:text-zinc-500 transition-colors">{stat.context}</p>
+                    <p className="text-[10px] text-zinc-500 leading-relaxed border-t border-[#27272A] pt-3 group-hover:text-[#A1A1AA] transition-colors">{stat.context}</p>
                   </div>
                 ))}
               </div>
 
-              {/* TWO COLUMN GRAPH LAYOUT */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
                 
-                {/* Graph 1: Top Friction Points (Horizontal) */}
-                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full relative">
+                <div className="bg-[#1C1C1F] border border-[#27272A] rounded-2xl p-8 hover:border-[#A1A1AA]/50 transition-colors flex flex-col h-full relative">
                   <div className="flex items-start justify-between mb-8">
                     <div>
                       <h3 className="text-lg font-medium text-zinc-200 mb-1">Critical Journey Drop-offs</h3>
@@ -241,23 +237,22 @@ export default function Page() {
                     </div>
                     <button 
                       onClick={() => setActiveTab('assistant')} 
-                      className="px-4 py-2 bg-zinc-800 hover:bg-amber-500 text-zinc-300 hover:text-zinc-950 text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 border border-zinc-700 hover:border-amber-500 shadow-sm group"
+                      className="px-4 py-2 bg-[#27272A] hover:bg-[#7A1A3E] text-[#A1A1AA] hover:text-zinc-100 text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 border border-[#27272A] hover:border-[#7A1A3E] shadow-sm group"
                     >
-                      <Sparkles className="w-3 h-3 text-amber-500 group-hover:text-zinc-950 transition-colors" /> Ask AI to Analyze
+                      <Sparkles className="w-3 h-3 text-[#7A1A3E] group-hover:text-zinc-100 transition-colors" /> Ask AI to Analyze
                     </button>
                   </div>
                   <div className="space-y-6 flex-1 mt-4">
                     {frictionData.map((item, i) => (
                       <div key={i} className="flex flex-col gap-2">
-                        <div className="flex justify-between text-sm"><span className="text-zinc-300">{item.label}</span><span className="text-zinc-500 font-mono">{item.value}%</span></div>
-                        <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden"><div className="h-full bg-amber-500 rounded-full transition-all duration-1000 ease-out" style={{ width: `${item.value}%` }}></div></div>
+                        <div className="flex justify-between text-sm"><span className="text-[#A1A1AA]">{item.label}</span><span className="text-zinc-400 font-mono">{item.value}%</span></div>
+                        <div className="w-full h-2 bg-[#27272A] rounded-full overflow-hidden"><div className="h-full bg-[#7A1A3E] rounded-full transition-all duration-1000 ease-out" style={{ width: `${item.value}%` }}></div></div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Graph 2: Product Usability Scores (Vertical Bars) */}
-                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-8 hover:border-zinc-700 transition-colors flex flex-col h-full">
+                <div className="bg-[#1C1C1F] border border-[#27272A] rounded-2xl p-8 hover:border-[#A1A1AA]/50 transition-colors flex flex-col h-full">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-medium text-zinc-200 mb-1">System Usability Scale (SUS)</h3>
@@ -265,27 +260,23 @@ export default function Page() {
                     </div>
                   </div>
                   
-                  {/* Vertical Bar Chart Container */}
-                  <div className="flex items-end justify-between flex-1 mt-8 gap-4 h-48 border-b border-zinc-800 pb-2">
+                  <div className="flex items-end justify-between flex-1 mt-8 gap-4 h-48 border-b border-[#27272A] pb-2">
                     {productUsability.map((item, i) => (
                       <div key={i} className="flex flex-col items-center gap-3 w-1/5 group h-full justify-end relative">
-                        {/* Score Tooltip/Label */}
                         <div className="text-zinc-400 font-mono text-xs group-hover:text-zinc-100 transition-colors">{item.score}</div>
                         
-                        {/* The Vertical Bar */}
-                        <div className="w-full bg-zinc-900 rounded-t-lg overflow-hidden flex items-end relative h-32 group-hover:bg-zinc-800 transition-colors">
+                        <div className="w-full bg-[#27272A] rounded-t-lg overflow-hidden flex items-end relative h-32 group-hover:bg-[#27272A]/80 transition-colors">
                           <div 
-                            className={`w-full rounded-t-lg transition-all duration-1000 ease-out ${item.score > 70 ? 'bg-emerald-500/80' : item.score > 40 ? 'bg-amber-500/80' : 'bg-red-500/80'} group-hover:brightness-125`} 
+                            className={`w-full rounded-t-lg transition-all duration-1000 ease-out ${item.score > 70 ? 'bg-emerald-700/80' : item.score > 40 ? 'bg-[#7A1A3E]/80' : 'bg-red-900/80'} group-hover:brightness-125`} 
                             style={{ height: `${item.score}%` }}
                           ></div>
                         </div>
                         
-                        {/* Product Label */}
                         <span className="text-[10px] text-zinc-500 text-center leading-tight mt-2 font-medium">{item.label}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-6">Note: Scores below 68 indicate marginal to poor usability requiring intervention.</p>
+                  <p className="text-[10px] text-zinc-500 uppercase tracking-widest mt-6">Note: Scores below 68 indicate marginal to poor usability requiring intervention.</p>
                 </div>
 
               </div>
@@ -298,19 +289,19 @@ export default function Page() {
                 <h1 className="text-4xl font-semibold text-zinc-100 tracking-tight mb-2">Data Sources</h1>
                 <p className="text-zinc-500 text-sm">Upload CSV or TXT exports to index them into the AI workspace.</p>
               </div>
-              <div onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`flex-1 min-h-[300px] border-2 border-dashed rounded-2xl flex flex-col items-center justify-center transition-all duration-300 ${isDragging ? 'border-amber-500 bg-amber-500/5 scale-[1.01]' : 'border-zinc-800 bg-[#111111]/50 hover:border-zinc-600'}`}>
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors duration-300 ${isDragging ? 'bg-amber-500/20 text-amber-500' : 'bg-zinc-800/80 text-zinc-400'}`}><UploadCloud className="w-8 h-8" /></div>
+              <div onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`flex-1 min-h-[300px] border-2 border-dashed rounded-2xl flex flex-col items-center justify-center transition-all duration-300 ${isDragging ? 'border-[#7A1A3E] bg-[#7A1A3E]/5 scale-[1.01]' : 'border-[#27272A] bg-[#1C1C1F]/50 hover:border-[#A1A1AA]/50'}`}>
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors duration-300 ${isDragging ? 'bg-[#7A1A3E]/20 text-[#7A1A3E]' : 'bg-[#27272A] text-zinc-400'}`}><UploadCloud className="w-8 h-8" /></div>
                 <h3 className="text-xl font-medium text-zinc-200 mb-2">{isDragging ? 'Drop files here' : 'Drag & drop files'}</h3>
                 <p className="text-zinc-500 text-sm mb-6 text-center max-w-sm">Support for CSV, TXT, and raw data exports. Files are processed securely in your local environment.</p>
               </div>
               {uploadedFiles.length > 0 && (
-                <div className="bg-[#111111] border border-zinc-800/60 rounded-2xl p-6 mt-2 animate-in slide-in-from-bottom-4 duration-300">
+                <div className="bg-[#1C1C1F] border border-[#27272A] rounded-2xl p-6 mt-2 animate-in slide-in-from-bottom-4 duration-300">
                   <h4 className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-4">Indexed Files</h4>
                   <div className="space-y-3">
                     {uploadedFiles.map((file, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl group hover:border-zinc-700 transition-colors">
+                      <div key={idx} className="flex items-center justify-between p-4 bg-[#0F0F11]/50 border border-[#27272A] rounded-xl group hover:border-[#A1A1AA]/50 transition-colors">
                         <div className="flex items-center gap-4">
-                          <File className="w-5 h-5 text-amber-500" />
+                          <File className="w-5 h-5 text-[#7A1A3E]" />
                           <div className="flex flex-col"><span className="text-sm font-medium text-zinc-200">{file.name}</span><span className="text-[11px] text-zinc-500 uppercase tracking-wider">{(file.size / 1024).toFixed(1)} KB</span></div>
                         </div>
                         <button onClick={() => removeFile(idx)} className="p-2 text-zinc-500 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><X className="w-4 h-4" /></button>
@@ -327,15 +318,15 @@ export default function Page() {
               <div className="flex-1 overflow-y-auto p-10 space-y-8">
                 {messages.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center opacity-50 select-none">
-                    <MessageSquare className="w-12 h-12 text-zinc-700 mb-4" />
+                    <MessageSquare className="w-12 h-12 text-[#A1A1AA] mb-4" />
                     <h2 className="text-xl font-medium text-zinc-400 mb-2">How can I help with your research?</h2>
-                    <p className="text-sm text-zinc-600 max-w-md">I have analyzed the indexed data. Ask me about sentiment trends, specific friction points, or feature requests.</p>
+                    <p className="text-sm text-[#A1A1AA] max-w-md">I have analyzed the indexed data. Ask me about sentiment trends, specific friction points, or feature requests.</p>
                   </div>
                 ) : (
                   messages.map(m => (
                     <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      {m.role === 'assistant' && <div className="w-8 h-8 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center mr-4 flex-shrink-0 mt-1"><span className="text-[10px] font-bold text-zinc-400">AI</span></div>}
-                      <div className={`max-w-[85%] px-6 py-5 ${m.role === 'user' ? 'bg-zinc-200 text-zinc-950 rounded-2xl rounded-tr-sm font-medium shadow-md' : 'bg-transparent text-zinc-300 border-l-2 border-amber-500 pl-6 py-2'}`}>
+                      {m.role === 'assistant' && <div className="w-8 h-8 rounded bg-[#1C1C1F] border border-[#27272A] flex items-center justify-center mr-4 flex-shrink-0 mt-1"><span className="text-[10px] font-bold text-[#7A1A3E]">AI</span></div>}
+                      <div className={`max-w-[85%] px-6 py-5 ${m.role === 'user' ? 'bg-[#27272A] text-zinc-100 rounded-2xl rounded-tr-sm font-medium shadow-md' : 'bg-transparent text-zinc-300 border-l-2 border-[#7A1A3E] pl-6 py-2'}`}>
                         <p className="text-[15px] leading-relaxed whitespace-pre-wrap">{m.content}</p>
                       </div>
                     </div>
@@ -343,12 +334,12 @@ export default function Page() {
                 )}
                 <div ref={messagesEndRef} />
               </div>
-              <div className="p-6 bg-[#0a0a0a] border-t border-zinc-800/60 z-10">
+              <div className="p-6 bg-[#0F0F11] border-t border-[#27272A] z-10">
                 <form onSubmit={manualSubmit} className="relative group">
-                  <input type="text" value={localInput} onChange={(e) => setLocalInput(e.target.value)} placeholder="Message your research agent..." className="w-full bg-[#111111] border border-zinc-700 rounded-2xl pl-5 pr-14 py-4 outline-none text-zinc-100 placeholder-zinc-500 text-[15px] shadow-sm transition-all focus:border-amber-500 focus:ring-1 focus:ring-amber-500/50" autoComplete="off" />
-                  <button type="submit" disabled={!localInput.trim() || isLoading} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-zinc-800 text-zinc-400 rounded-xl hover:bg-amber-500 hover:text-zinc-950 disabled:opacity-50 transition-colors"><CornerDownLeft className="w-4 h-4" strokeWidth={2.5} /></button>
+                  <input type="text" value={localInput} onChange={(e) => setLocalInput(e.target.value)} placeholder="Message your research agent..." className="w-full bg-[#1C1C1F] border border-[#27272A] rounded-2xl pl-5 pr-14 py-4 outline-none text-zinc-100 placeholder-zinc-500 text-[15px] shadow-sm transition-all focus:border-[#7A1A3E] focus:ring-1 focus:ring-[#7A1A3E]/50" autoComplete="off" />
+                  <button type="submit" disabled={!localInput.trim() || isLoading} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-[#27272A] text-[#A1A1AA] rounded-xl hover:bg-[#7A1A3E] hover:text-zinc-100 disabled:opacity-50 transition-colors"><CornerDownLeft className="w-4 h-4" strokeWidth={2.5} /></button>
                 </form>
-                <p className="text-center text-[10px] text-zinc-600 mt-3 font-medium uppercase tracking-widest">Cust 360 AI responses are generated based on indexed data</p>
+                <p className="text-center text-[10px] text-[#A1A1AA] mt-3 font-medium uppercase tracking-widest">Cust 360 AI responses are generated based on indexed data</p>
               </div>
             </div>
           )}
